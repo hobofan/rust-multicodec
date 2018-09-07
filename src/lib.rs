@@ -7,7 +7,7 @@ use unsigned_varint::{decode::u16 as decode_varint,
                       encode::u16 as encode_varint,
                       decode::Error as VarintError};
 
-use serde::{Serialize, Serializer, ser::SerializeSeq};
+use serde::{Serialize, Serializer};
 
 #[derive(Debug, Fail)]
 pub enum Error {
