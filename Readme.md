@@ -1,6 +1,6 @@
 # Multicodec in Rust
 
-[![](https://img.shields.io/travis/gnunicorn/rust-multicodec/master.svg)](https://travis-ci.org/gnunicorn/rust-multicodec)[![](https://img.shields.io/crates/l/rustc-serialize.svg)](https://github.com/gnunicorn/rust-multicodec/issues)![](https://img.shields.io/crates/l/multicodec.svg)[![](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+[![](https://img.shields.io/travis/gnunicorn/rust-multicodec/master.svg?style=flat-square)](https://travis-ci.org/gnunicorn/rust-multicodec) ![](https://img.shields.io/crates/l/multicodec.svg?style=flat-square) [![](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
 > rust implementation of the [multicodec specs](https://github.com/multiformats/multicodec)
 
