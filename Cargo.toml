@@ -1,0 +1,10 @@
+[package]
+name = "multicodec"
+version = "0.1.0"
+authors = ["Benjamin Kampmann <ben@gnunicorn.org>"]
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+unsigned-varint = "0.2"
+failure = "0.1"
+serde = "1.0"
