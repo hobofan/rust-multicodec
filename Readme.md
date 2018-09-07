@@ -17,6 +17,6 @@
 
 ### Mgmnt
  - [x] Github setup
- - [ ] Publish on crates.io
+ - [x] Publish on crates.io
  - [ ] Add proper License Files
  - [x] Activate travis-ci
