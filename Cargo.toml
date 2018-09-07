@@ -5,6 +5,9 @@ authors = ["Benjamin Kampmann <ben@gnunicorn.org>"]
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/gnunicorn/rust-multicodec"
 
+[badges]
+travis-ci = { repository = "gnunicorn/rust-multicodec", branch = "master"}
+
 [dependencies]
 unsigned-varint = "0.2"
 failure = "0.1"
