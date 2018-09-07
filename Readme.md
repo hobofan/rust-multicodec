@@ -16,6 +16,7 @@
  - [ ] no-std/Wasm-support
 
 ### Mgmnt
+ - [x] Github setup
  - [ ] Publish on crates.io
  - [ ] Add proper License Files
  - [ ] Activate travis-ci

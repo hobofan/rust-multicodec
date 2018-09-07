@@ -3,6 +3,7 @@ name = "multicodec"
 version = "0.1.0"
 authors = ["Benjamin Kampmann <ben@gnunicorn.org>"]
 license = "MIT OR Apache-2.0"
+repository = "https://github.com/gnunicorn/rust-multicodec"
 
 [dependencies]
 unsigned-varint = "0.2"
