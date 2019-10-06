@@ -1,11 +1,11 @@
 extern crate unsigned_varint;
-#[macro_use] extern crate failure;
+#[macro_use]
+extern crate failure;
 extern crate serde;
 
-
-use unsigned_varint::{decode::u16 as decode_varint,
-                      encode::u16 as encode_varint,
-                      decode::Error as VarintError};
+use unsigned_varint::{
+    decode::u16 as decode_varint, decode::Error as VarintError, encode::u16 as encode_varint,
+};
 
 use serde::{Serialize, Serializer};
 
@@ -14,8 +14,7 @@ pub enum Error {
     #[fail(display = "Codec {} unknown", _0)]
     InvalidCodec(u16),
     #[fail(display = "Can't parse varint: {}", _0)]
-    VarintFailed(VarintError)
-
+    VarintFailed(VarintError),
 }
 
 macro_rules! build_codec_enum {
@@ -49,11 +48,11 @@ macro_rules! build_codec_enum {
 
 // SOURCE: https://github.com/multiformats/multicodec/blob/master/table.csv
 build_codec_enum! {
-	0x55 => Bin,
+    0x55 => Bin,
     // bases encodings
     0x01 => Base1,
     0x07 => Base8,
-    0x09 => Base10, 
+    0x09 => Base10,
 
     // serialization formats
     0x51 => Cbor,
@@ -198,7 +197,7 @@ build_codec_enum! {
     0x0122 => P2p_Circuit,
 
     // IPLD formats
-    0x70 => Dag_Pb, 
+    0x70 => Dag_Pb,
     0x71 => Dag_Cbor,
 
     0x78 => Git_Raw,
@@ -206,11 +205,11 @@ build_codec_enum! {
     0x90 => Eth_Block,
     0x91 => Eth_Block_List,
     0x92 => Eth_Tx_Trie,
-    0x93 => Eth_Tx, 
+    0x93 => Eth_Tx,
     0x94 => Eth_Tx_Receipt_Trie,
     0x95 => Eth_Tx_Receipt,
     0x96 => Eth_State_Trie,
-    0x97 => Eth_Account_Snapshot, 
+    0x97 => Eth_Account_Snapshot,
     0x98 => Eth_Storage_Trie,
 
     0xb0 => Bitcoin_Block,
@@ -227,33 +226,34 @@ build_codec_enum! {
     0xed => Ed25519_Pub,
 }
 
-
 #[derive(PartialEq, Eq, Clone, Copy, Debug)]
 pub struct MultiCodec<'a> {
-	codec: Codec,
-	data: &'a [u8]
+    pub codec: Codec,
+    pub data: &'a [u8],
 }
 
 impl<'a> MultiCodec<'a> {
-	/// create a new MultiCodec
-	pub fn new(codec: Codec, data: &'a [u8]) -> MultiCodec {
-		MultiCodec { codec, data }
-	}
-	/// try to parse a MultiCodec from a packed bytestring
-	pub fn from(packed: &'a [u8]) -> Result<MultiCodec, Error> {
-		let (code, data) = decode_varint(packed).map_err(|e| Error::VarintFailed(e))?;
-		let codec = Codec::from_code(code)?;
-		Ok(MultiCodec { codec, data })
-	}
+    /// create a new MultiCodec
+    pub fn new(codec: Codec, data: &'a [u8]) -> MultiCodec {
+        MultiCodec { codec, data }
+    }
+    /// try to parse a MultiCodec from a packed bytestring
+    pub fn from(packed: &'a [u8]) -> Result<MultiCodec, Error> {
+        let (code, data) = decode_varint(packed).map_err(|e| Error::VarintFailed(e))?;
+        let codec = Codec::from_code(code)?;
+        Ok(MultiCodec { codec, data })
+    }
 
     pub fn pack(&self) -> Vec<u8> {
         let mut buf = [0u8; 3];
         encode_varint(self.codec.code(), &mut buf);
-        let mut v : Vec<u8> = Vec::new();
+        let mut v: Vec<u8> = Vec::new();
         for b in &buf {
             v.push(*b);
             // varint uses first bit to indicate another byte follows, stop if not the case
-            if *b <= 127 { break }
+            if *b <= 127 {
+                break;
+            }
         }
         v.extend(self.data);
         v
@@ -269,11 +269,9 @@ impl<'a> Serialize for MultiCodec<'a> {
     }
 }
 
-
-
 #[cfg(test)]
 mod tests {
-	use super::*;
+    use super::*;
     #[test]
     fn it_works() {
         let codec = MultiCodec::new(Codec::Sha2_256, b"EiC5TSe5k00");
